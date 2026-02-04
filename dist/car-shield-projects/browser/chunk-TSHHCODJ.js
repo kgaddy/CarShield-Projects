@@ -1,0 +1,1 @@
+import{Ba as n,Ca as s,Fa as r,ua as o}from"./chunk-6BWAXUIY.js";var p=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=o({type:t,selectors:[["app-projects"]],decls:2,vars:0,consts:[[1,"jumbotron"]],template:function(e,i){e&1&&(n(0,"div",0),r(1,"projects works!"),s())},encapsulation:2})};export{p as ProjectsComponent};
