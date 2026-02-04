@@ -1,5 +1,5 @@
-Project: Team Project Management Dashboard
-Timeline : 14days
+*Project: Team Project Management Dashboard
+-- Timeline : 14days
 Login Page (no backend)
 - admin
 - user
