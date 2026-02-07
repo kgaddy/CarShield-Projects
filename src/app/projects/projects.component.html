@@ -9,7 +9,7 @@
     <ng-template #projectList>
       <div *ngFor="let project of projects" class="project-card">
         <h3>{{ project.description }}</h3>
-        <p>Status: {{ project.status }}</p>
+        <p><span class="badge rounded-pill {{ProjectStatus.getStatusStyle(project.status)}}">{{ ProjectStatus.toDisplayString(project.status) }}</span></p>
         <p>Created: {{ project.createdOn | date }}</p>
         <p>Tasks: {{ project.projectTasks.length }}</p>
         

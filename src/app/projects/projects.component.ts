@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProjectService } from '../services/project.service';
 import { AuthService } from '../services/auth.service';
-import { Project } from '../models/project';
+import { Project, ProjectStatus } from '../models/project';
 import { User } from '../models/auth';
 
 @Component({
@@ -14,6 +14,7 @@ import { User } from '../models/auth';
   styleUrl: './projects.component.scss'
 })
 export class ProjectsComponent implements OnInit {
+  ProjectStatus = ProjectStatus;
   projects$!: Observable<Project[]>;
   currentUser$!: Observable<User | null>;
 
