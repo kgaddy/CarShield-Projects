@@ -4,6 +4,7 @@ export interface ProjectTask {
   description: string;
   status: number;
   assignedTo: string;
+  assignedToDisplayName: String;
 }
 
 export interface Project {
@@ -13,6 +14,8 @@ export interface Project {
   createdBy: string;
   createdOn: string;
   projectTasks: ProjectTask[];
+  createdByDisplayName: string;
+  percentComplete: DoubleRange
 }
 
 export enum ProjectStatus {
