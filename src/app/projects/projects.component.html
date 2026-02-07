@@ -1,1 +1,30 @@
-<div class="jumbotron">projects works!</div>
+<div class="projects-container">
+  <h1>Projects</h1>
+  
+  <div *ngIf="projects$ | async as projects; else loading">
+    <div *ngIf="projects.length === 0; else projectList">
+      <p>No projects found.</p>
+    </div>
+    
+    <ng-template #projectList>
+      <div *ngFor="let project of projects" class="project-card">
+        <h3>{{ project.description }}</h3>
+        <p>Status: {{ project.status }}</p>
+        <p>Created: {{ project.createdOn | date }}</p>
+        <p>Tasks: {{ project.projectTasks.length }}</p>
+        
+        <!-- Show edit button only if user can edit -->
+        <button *ngIf="canEdit(project)">Edit</button>
+        
+        <!-- Or show different UI for own projects -->
+        <span *ngIf="project.createdBy === (currentUser$ | async)?.id">
+          (Your Project)
+        </span>
+      </div>
+    </ng-template>
+  </div>
+  
+  <ng-template #loading>
+    <p>Loading projects...</p>
+  </ng-template>
+</div>
