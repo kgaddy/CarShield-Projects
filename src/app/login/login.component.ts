@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core'; 
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LoginRequest } from '../models/auth';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       email: [''],
       password: ['']
     })
-    
+
   }
 
   ngOnInit(): void {
@@ -38,18 +38,22 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.errorMessage = '';
     const payload = this.buildLoginPayload();
-    if (this.authService.login(payload.email ?? '', payload.password ?? '')){
-      //hide login
-      this.router.navigate(['/']); 
-      this.isLoading = false;
 
-
-    }else {
-      this.errorMessage = "invalid Login"
-    }
+    this.authService.login(payload.email ?? '', payload.password ?? '').subscribe({
+      next: (user) => {
+        // Success - navigate to home
+        this.router.navigate(['/']);
+        this.isLoading = false;
+      },
+      error: (error) => {
+        // Error - show message
+        this.errorMessage = 'Invalid login';
+        this.isLoading = false;
+      }
+    });
   }
 
-   private toOptionalString(value: string | null | undefined): string | undefined {
+  private toOptionalString(value: string | null | undefined): string | undefined {
     if (value === null || value === undefined) {
       return undefined;
     }

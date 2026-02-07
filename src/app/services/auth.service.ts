@@ -1,35 +1,19 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { User, AuthType } from '../models/auth';
-
+import { User, AuthType, LoginResponse, LoginRequest } from '../models/auth';
+import { HttpClient } from '@angular/common/http';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // Mock users (hardcoded for now)
-  private mockUsers: User[] = [
-    {
-      email: 'admin@test.com',
-      password: 'admin123',
-      firstName: 'John',
-      lastName: 'Admin',
-      authType: AuthType.Admin
-    },
-    {
-      email: 'user@test.com',
-      password: 'user123',
-      firstName: 'John',
-      lastName: 'User',
-      authType: AuthType.User
-    }
-  ];
 
   // Current user state (null means not logged in)
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
 
-  constructor() {
+  constructor(private http: HttpClient) {
     if (this.isBrowser()) {
       const savedUser = localStorage.getItem('currentUser');
       if (savedUser) {
@@ -42,20 +26,34 @@ export class AuthService {
     return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   }
 
-  // Login method
-  login(email: string, password: string): boolean {
-    const user = this.mockUsers.find(
-      u => u.email === email && u.password === password
-    );
+  private mapApiUserToUser(apiUser: LoginResponse): User {
+    return {
+      id: apiUser.id,
+      email: apiUser.email,
+      password: apiUser.password,
+      firstName: apiUser.firstName,
+      lastName: apiUser.lastName,
+      authType: apiUser.role === 'admin' ? AuthType.Admin : AuthType.User
+    };
+  }
 
-    if (user) {
-      // Don't store password in localStorage or state
-      const userWithoutPassword = { ...user, password: '' };
-      this.currentUserSubject.next(userWithoutPassword);
-      localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
-      return true;
-    }
-    return false;
+  // Login method
+
+  login(email: string, password: string): Observable<User> {
+    const url = `/api/Project/Login`;
+    const body: LoginRequest = { email, password };
+  
+    return this.http.post<LoginResponse>(url, body).pipe(
+      map(apiResponse => this.mapApiUserToUser(apiResponse)),
+      tap(user => {
+        // Don't store password in localStorage or state
+        const userWithoutPassword = { ...user, password: '' };
+        this.currentUserSubject.next(userWithoutPassword);
+        if (this.isBrowser()) {
+          localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
+        }
+      })
+    );
   }
 
   // Logout method
