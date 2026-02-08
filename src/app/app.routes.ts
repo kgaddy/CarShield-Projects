@@ -18,6 +18,14 @@ export const routes: Routes = [{
     canActivate: [authGuard] 
 },
 {
+    path:'project/:Id',
+    pathMatch: 'full',
+    loadComponent: () => {
+        return import('./project-detail/project-detail.component').then((m) => m.ProjectDetailComponent)
+    },
+    canActivate: [authGuard] 
+},
+{
     path:'login',
     pathMatch: 'full',
     loadComponent: () => {

@@ -26,7 +26,11 @@
                   {{ ProjectStatus.toDisplayString(project.status) }}
                 </span>
               </td>
-              <td>{{ project.description }}</td>
+              <td>
+                <a *ngIf="project.id;" [routerLink]="['/project', project.id]">
+                    {{ project.name }}
+                </a>
+              </td>
               <td>{{ project.createdByDisplayName }}</td>
               <td>{{ project.percentComplete }}% complete</td>
               <td>

@@ -9,6 +9,7 @@ export interface ProjectTask {
 
 export interface Project {
   id: string;
+  name: string;
   description: string;
   status: ProjectStatus;
   createdBy: string;

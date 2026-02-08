@@ -16,18 +16,14 @@ export class ProjectService {
     private authService: AuthService
   ) {}
 
-  /**
-   * Get all projects
-   * All users can see all projects
-   */
+  // all
   getProjects(): Observable<Project[]> {
     return this.http.get<Project[]>('/api/Project/GetProjects');
   }
 
-  /**
-   * Get all projects with user context
-   * Returns projects along with information about which ones the current user can edit
-   */
+
+   // Get all projects for user
+
   getProjectsWithPermissions(): Observable<{ projects: Project[], currentUser: User | null }> {
     return combineLatest([
       this.http.get<Project[]>('/api/Project/GetProjects'),
@@ -40,11 +36,14 @@ export class ProjectService {
     );
   }
 
-  /**
-   * Check if the current user can edit a specific project
-   * - Admins can edit all projects
-   * - Regular users can only edit projects they created
-   */
+
+  //Get a single project by ID
+ 
+  getProject(id: string): Observable<Project> {
+    return this.http.get<Project>(`/api/Project/GetProject/${id}`);
+  }
+
+
   canEditProject(project: Project): Observable<boolean> {
     return this.authService.currentUser$.pipe(
       map(user => {
@@ -55,16 +54,13 @@ export class ProjectService {
           return true;
         }
         
-        // Regular users can only edit their own projects
+        // users can only edit their own projects
         return project.createdBy === user.id;
       })
     );
   }
 
-  /**
-   * Synchronous version - check if current user can edit a project
-   * Useful for template expressions or quick checks
-   */
+  // checks if a user can edit
   canEditProjectSync(project: Project): boolean {
     const user = this.authService.currentUserValue;
     
@@ -79,9 +75,7 @@ export class ProjectService {
     return project.createdBy === user.id;
   }
 
-  /**
-   * Get only projects created by the current user
-   */
+  
   getMyProjects(): Observable<Project[]> {
     return combineLatest([
       this.http.get<Project[]>('/api/Project/GetProjects'),
