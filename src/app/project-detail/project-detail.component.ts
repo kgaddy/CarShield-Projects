@@ -1,24 +1,26 @@
 import { Component } from '@angular/core';
-import { Project } from '../models/project';
+import { Project, ProjectStatus } from '../models/project';
 import { ProjectService } from '../services/project.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-project-detail',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.scss'
 })
 
 export class ProjectDetailComponent {
   project: Project | null = null;
+  ProjectStatus = ProjectStatus;
   Id: string | null = null;
   isLoading = false;
   errorMessage = '';
 
   constructor(
-     private route: ActivatedRoute,
+    private route: ActivatedRoute,
     private projectService: ProjectService
   ) {}
 
