@@ -36,7 +36,6 @@
               <td>
                 <button *ngIf="canEdit(project)" class="btn btn-sm btn-primary">Edit</button>
                 <span *ngIf="project.createdBy === (currentUser$ | async)?.id" class="text-muted ms-2">
-                  (Your Project)
                 </span>
               </td>
             </tr>
