@@ -1,9 +1,8 @@
-<div>
+<div class="container">
     <p *ngIf="isLoading">Loading project...</p>
     <p *ngIf="errorMessage">{{ errorMessage }}</p>
-
+    <h1>{{project?.name}}</h1>
     <ul class="list-group">
-        <li class="list-group-item"><h1>{{project?.name}}</h1></li>
         <li class="list-group-item">
             <span class="badge rounded-pill" [ngClass]="ProjectStatus.getStatusStyle(project?.status ?? ProjectStatus.NotStarted)">
             {{ ProjectStatus.toDisplayString(project?.status ?? ProjectStatus.NotStarted) }}
@@ -12,16 +11,18 @@
         <li class="list-group-item">{{project?.createdByDisplayName}}</li>
         <li class="list-group-item">{{project?.description}}</li>
         <li class="list-group-item">Tasks Complete: %{{project?.percentComplete}}</li>
-        <li class="list-group-item">Tasks Count: {{project?.projectTasks?.length}}</li>
     </ul>
 
     <div *ngIf="!project?.projectTasks ; else taskList">
       <p>No tasks found for this project.</p>
     </div>
 
+</div>
+
+
     <ng-template #taskList>
-      <div class="table-responsive">
-        <H3>Tasks</H3>
+      <div class="table-responsive pt-5">
+        <H4>Tasks</H4>
         <table class="table table-striped table-hover">
           <thead>
             <tr>
@@ -49,5 +50,3 @@
         </table>
       </div>
     </ng-template>
-
-</div>
