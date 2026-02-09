@@ -15,3 +15,17 @@
     color: #388e3c;
     font-weight: 500;
   }
+
+  .highlight-toolbar {
+    background-color: var(--bd-pre-bg);
+  }
+
+  .btn-edit {
+    display: block;
+    padding: .5em;
+    line-height: 1;
+    color: var(--bs-body-color);
+    background-color: var(--bd-pre-bg);
+    border: 0;
+    border-radius: .25rem;
+  }

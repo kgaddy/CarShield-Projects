@@ -1,52 +1,65 @@
 <div class="container">
-    <p *ngIf="isLoading">Loading project...</p>
-    <p *ngIf="errorMessage">{{ errorMessage }}</p>
-    <h1>{{project?.name}}</h1>
-    <ul class="list-group">
-        <li class="list-group-item">
-            <span class="badge rounded-pill" [ngClass]="ProjectStatus.getStatusStyle(project?.status ?? ProjectStatus.NotStarted)">
-            {{ ProjectStatus.toDisplayString(project?.status ?? ProjectStatus.NotStarted) }}
-            </span>
-        </li>
-        <li class="list-group-item">{{project?.createdByDisplayName}}</li>
-        <li class="list-group-item">{{project?.description}}</li>
-        <li class="list-group-item">Tasks Complete: %{{project?.percentComplete}}</li>
-    </ul>
+  <p *ngIf="isLoading">Loading project...</p>
+  <p *ngIf="errorMessage">{{ errorMessage }}</p>
+  <h1>{{project?.name}}</h1>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <span class="badge rounded-pill"
+        [ngClass]="ProjectStatus.getStatusStyle(project?.status ?? ProjectStatus.NotStarted)">
+        {{ ProjectStatus.toDisplayString(project?.status ?? ProjectStatus.NotStarted) }}
+      </span>
+    </li>
+    <li class="list-group-item">{{project?.createdByDisplayName}}</li>
+    <li class="list-group-item">{{project?.description}}</li>
+    <li class="list-group-item">Tasks Complete: %{{project?.percentComplete}}</li>
+  </ul>
 
-    <div *ngIf="!project?.projectTasks ; else taskList">
-      <p>No tasks found for this project.</p>
-    </div>
+  <div *ngIf="!project?.projectTasks ; else taskList">
+    <p>No tasks found for this project.</p>
+  </div>
 
 </div>
 
+<ng-template #taskList>
 
-    <ng-template #taskList>
-      <div class="table-responsive pt-5">
-        <H4>Tasks</H4>
-        <table class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Status</th>
-              <th>Assigned To</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let projectTask of project?.projectTasks">
-              <td>
-                <a *ngIf="projectTask.id;" [routerLink]="['/task', project?.id, projectTask.id]">
-                    {{ projectTask.title }}
-                </a>
-              </td>
-            <td>
-               {{projectTask.description}}
-              </td>
-            <td>{{ projectTask.status }}</td>
-              <td>{{ projectTask.assignedToDisplayName }}</td>
-           
-            </tr>
-          </tbody>
-        </table>
+  <div class="table-responsive pt-5">
+
+
+
+    <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
+      <h4>Tasks</h4>
+      <div class="d-flex ms-auto">
+        <button type="button" class="btn btn-primary btn-sm" aria-label="Add Task Button"
+          data-bs-original-title="Add Task">
+          Add Task
+        </button>
       </div>
-    </ng-template>
+    </div>
+
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Assigned To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let projectTask of project?.projectTasks">
+          <td>
+            <a *ngIf="projectTask.id;" [routerLink]="['/task', project?.id, projectTask.id]">
+              {{ projectTask.title }}
+            </a>
+          </td>
+          <td>
+            {{projectTask.description}}
+          </td>
+          <td>{{ projectTask.status }}</td>
+          <td>{{ projectTask.assignedToDisplayName }}</td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>
