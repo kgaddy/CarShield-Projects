@@ -34,7 +34,7 @@
           <tbody>
             <tr *ngFor="let projectTask of project?.projectTasks">
               <td>
-                <a *ngIf="projectTask.id;" [routerLink]="['/taskDetail', projectTask.id]">
+                <a *ngIf="projectTask.id;" [routerLink]="['/task', project?.id, projectTask.id]">
                     {{ projectTask.title }}
                 </a>
               </td>

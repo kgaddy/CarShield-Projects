@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, combineLatest } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { Project } from '../models/project';
+import { Project, ProjectTask } from '../models/project';
 import { AuthService } from './auth.service';
 import { User } from '../models/auth';
 
@@ -38,11 +38,9 @@ export class ProjectService {
 
 
   //Get a single project by ID
- 
   getProject(id: string): Observable<Project> {
     return this.http.get<Project>(`/api/Project/GetProject/${id}`);
   }
-
 
   canEditProject(project: Project): Observable<boolean> {
     return this.authService.currentUser$.pipe(
@@ -86,5 +84,11 @@ export class ProjectService {
         return projects.filter(project => project.createdBy === currentUser.id);
       })
     );
+  }
+
+
+  // Tasks
+  getProjectTask(projectId: string, taskId: string): Observable<ProjectTask> {
+    return this.http.get<ProjectTask>(`/api/Project/${projectId}/tasks/${taskId}`);
   }
 }

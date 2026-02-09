@@ -39,7 +39,6 @@ export class ProjectDetailComponent {
     this.isLoading = true;
     this.errorMessage = '';
     
-
     this.projectService.getProject(Id).subscribe({
       next: (project) => {
         this.project = project;
