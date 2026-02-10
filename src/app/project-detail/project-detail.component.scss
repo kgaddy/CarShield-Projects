@@ -3,13 +3,13 @@
     color: #1976d2;
     font-weight: 500;
   }
-  
+
   .status-in-progress {
     background-color: #fff3e0;
     color: #f57c00;
     font-weight: 500;
   }
-  
+
   .status-completed {
     background-color: #e8f5e9;
     color: #388e3c;
@@ -18,14 +18,4 @@
 
   .highlight-toolbar {
     background-color: var(--bd-pre-bg);
-  }
-
-  .btn-edit {
-    display: block;
-    padding: .5em;
-    line-height: 1;
-    color: var(--bs-body-color);
-    background-color: var(--bd-pre-bg);
-    border: 0;
-    border-radius: .25rem;
   }

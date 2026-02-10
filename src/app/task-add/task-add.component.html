@@ -1,1 +1,43 @@
-<p>task-add works!</p>
+<div class="container">
+
+    <p *ngIf="isLoading">Loading...</p>
+    <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+    <p *ngIf="successMessage">{{ successMessage }}</p>
+
+    <h1>Add Task</h1>
+    <form *ngIf="!isLoading" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" formControlName="title" placeholder="Title">
+            <label for="floatingInput">Title</label>
+        </div>
+
+        <div class="form-floating">
+            <textarea class="form-control" formControlName="description" placeholder="Leave a comment here"
+                id="floatingTextarea"></textarea>
+            <label for="floatingTextarea">Description</label>
+        </div>
+        <div class="form-floating">
+            <select class="form-select" id="floatingSelect" formControlName="status"
+                aria-label="Floating label select example">
+                <option value="1" selected>New</option>
+                <option value="2">Ready</option>
+                <option value="3">In-Progress</option>
+                <option value="4">Done</option>
+            </select>
+            <label for="floatingSelect">Status</label>
+        </div>
+        <div class="form-floating">
+            <select class="form-select" id="floatingSelect" formControlName="assignedTo"
+                aria-label="Floating label select example">
+                <option value="nb699d54-u6a3-427d-bd94-c5e69a236wgv" selected>John Smith</option>
+                <option value="zzx9d53q-u6a3-4234d-bd94-c5sa2a236wgv">Alex Thompson</option>
+                <option value="kkj6d53q-u2x3-4234d-bd94-obzt2a236wgv">James Monroe</option>
+                <option value="0">None</option>
+            </select>
+            <label for="floatingSelect">Assign To:</label>
+        </div>
+        <div class="form-floating pt-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>

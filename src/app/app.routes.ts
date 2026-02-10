@@ -1,40 +1,48 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './guards/auth.guard'; 
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [{
-    path:'',
+    path: '',
     pathMatch: 'full',
     loadComponent: () => {
         return import('./home/home.component').then((m) => m.HomeComponent)
     },
-    canActivate: [authGuard] 
+    canActivate: [authGuard]
 },
 {
-    path:'projects',
+    path: 'projects',
     pathMatch: 'full',
     loadComponent: () => {
         return import('./projects/projects.component').then((m) => m.ProjectsComponent)
     },
-    canActivate: [authGuard] 
+    canActivate: [authGuard]
 },
 {
-    path:'project/:Id',
+    path: 'project/:Id',
     pathMatch: 'full',
     loadComponent: () => {
         return import('./project-detail/project-detail.component').then((m) => m.ProjectDetailComponent)
     },
-    canActivate: [authGuard] 
+    canActivate: [authGuard]
 },
 {
-    path:'task/:projectId/:taskId',
+    path: 'task/:projectId/:taskId',
     pathMatch: 'full',
     loadComponent: () => {
         return import('./task-detail/task-detail.component').then((m) => m.TaskDetailComponent)
     },
-    canActivate: [authGuard] 
+    canActivate: [authGuard]
 },
 {
-    path:'login',
+    path: 'addTask/:projectId',
+    pathMatch: 'full',
+    loadComponent: () => {
+        return import('./task-add/task-add.component').then((m) => m.TaskAddComponent)
+    },
+    canActivate: [authGuard]
+},
+{
+    path: 'login',
     pathMatch: 'full',
     loadComponent: () => {
         return import('./login/login.component').then((m) => m.LoginComponent)

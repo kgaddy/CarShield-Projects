@@ -29,10 +29,14 @@
     <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
       <h4>Tasks</h4>
       <div class="d-flex ms-auto">
+
+
         <button type="button" class="btn btn-primary btn-sm" aria-label="Add Task Button"
-          data-bs-original-title="Add Task">
+          data-bs-original-title="Add Task" *ngIf="project?.id;" [routerLink]="['/addTask', project?.id]">
           Add Task
         </button>
+
+
       </div>
     </div>
 
