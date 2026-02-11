@@ -37,7 +37,15 @@ export const routes: Routes = [{
     path: 'addTask/:projectId',
     pathMatch: 'full',
     loadComponent: () => {
-        return import('./task-add/task-add.component').then((m) => m.TaskAddComponent)
+        return import('./task-form/task-form.component').then((m) => m.TaskFormComponent)
+    },
+    canActivate: [authGuard]
+},
+{
+    path: 'editTask/:projectId/:taskId',
+    pathMatch: 'full',
+    loadComponent: () => {
+        return import('./task-form/task-form.component').then((m) => m.TaskFormComponent)
     },
     canActivate: [authGuard]
 },

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Project, ProjectStatus } from '../models/project';
 import { ProjectService } from '../services/project.service';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -21,6 +21,7 @@ export class ProjectDetailComponent {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private projectService: ProjectService
   ) { }
 
@@ -59,7 +60,10 @@ export class ProjectDetailComponent {
   }
 
   onEditTask(taskId: string) {
-
+    if (!this.project?.id) {
+      return;
+    }
+    this.router.navigate(['/editTask', this.project.id, taskId]);
   }
 
   onDeleteTask(taskId: string) {
