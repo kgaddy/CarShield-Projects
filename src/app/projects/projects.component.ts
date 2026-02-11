@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProjectService } from '../services/project.service';
 import { AuthService } from '../services/auth.service';
-import { Project, ProjectStatus } from '../models/project';
+import { Project, ProjectStatus, TaskStatus } from '../models/project';
 import { User } from '../models/auth';
 
 @Component({
@@ -15,13 +15,14 @@ import { User } from '../models/auth';
 })
 export class ProjectsComponent implements OnInit {
   ProjectStatus = ProjectStatus;
+  TaskStatus = TaskStatus
   projects$!: Observable<Project[]>;
   currentUser$!: Observable<User | null>;
 
   constructor(
     private projectService: ProjectService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.projects$ = this.projectService.getProjects();

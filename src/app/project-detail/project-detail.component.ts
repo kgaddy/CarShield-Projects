@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Project, ProjectStatus } from '../models/project';
+import { Project, ProjectStatus, TaskStatus } from '../models/project';
 import { ProjectService } from '../services/project.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,6 +14,7 @@ import { RouterLink } from '@angular/router';
 
 export class ProjectDetailComponent {
   project: Project | null = null;
+  TaskStatus = TaskStatus
   ProjectStatus = ProjectStatus;
   Id: string | null = null;
   isLoading = false;

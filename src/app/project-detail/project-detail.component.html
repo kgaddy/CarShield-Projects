@@ -11,7 +11,7 @@
     </li>
     <li class="list-group-item">{{project?.createdByDisplayName}}</li>
     <li class="list-group-item">{{project?.description}}</li>
-    <li class="list-group-item">Tasks Complete: %{{project?.percentComplete}}</li>
+    <li class="list-group-item">Tasks Complete: {{project?.percentComplete}}%</li>
   </ul>
 
   <div *ngIf="!project?.projectTasks ; else taskList">
@@ -60,7 +60,7 @@
           <td>
             {{projectTask.description}}
           </td>
-          <td>{{ projectTask.status }}</td>
+          <td>{{ TaskStatus.toDisplayString(projectTask.status) }}</td>
           <td>{{ projectTask.assignedToDisplayName }}</td>
           <td *ngIf="canEdit()">
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">

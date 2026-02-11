@@ -2,10 +2,36 @@ export interface ProjectTask {
   id: string;
   title: string;
   description: string;
-  status: number;
+  status: TaskStatus;
   assignedTo: string;
   assignedToDisplayName: String;
 }
+
+export enum TaskStatus {
+  StatusNew = 0, // new is a reserved word
+  Ready = 1,
+  InProgress = 2,
+  Done = 3
+}
+
+export namespace TaskStatus {
+
+  export function toDisplayString(status: TaskStatus): string {
+    switch (status) {
+      case TaskStatus.StatusNew:
+        return 'New';
+      case TaskStatus.Ready:
+        return 'Ready';
+      case TaskStatus.InProgress:
+        return 'In Progress';
+      case TaskStatus.Done:
+        return 'Done';
+      default:
+        return 'Unknown';
+    }
+  }
+}
+
 
 export interface Project {
   id: string;
@@ -40,15 +66,15 @@ export namespace ProjectStatus {
   }
 
   export function getStatusStyle(status: ProjectStatus): string {
-  switch (status) {
-    case ProjectStatus.NotStarted:
-      return 'text-bg-info';
-    case ProjectStatus.InProgress:
-      return 'text-bg-success';
-    case ProjectStatus.Completed:
-      return 'text-bg-secondary';
-    default:
-      return 'text-bg-danger';
+    switch (status) {
+      case ProjectStatus.NotStarted:
+        return 'text-bg-info';
+      case ProjectStatus.InProgress:
+        return 'text-bg-success';
+      case ProjectStatus.Completed:
+        return 'text-bg-secondary';
+      default:
+        return 'text-bg-danger';
     }
-}
+  }
 }
