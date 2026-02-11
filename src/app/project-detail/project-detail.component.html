@@ -47,6 +47,7 @@
           <th>Description</th>
           <th>Status</th>
           <th>Assigned To</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -61,6 +62,12 @@
           </td>
           <td>{{ projectTask.status }}</td>
           <td>{{ projectTask.assignedToDisplayName }}</td>
+          <td *ngIf="canEdit()">
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+              <button class="btn btn-sm btn-primary" (click)="onEditTask(projectTask.id)">Edit</button>
+              <button class="btn btn-sm btn-danger" (click)="onDeleteTask(projectTask.id)">Delete</button>
+            </div>
+          </td>
 
         </tr>
       </tbody>

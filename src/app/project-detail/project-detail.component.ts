@@ -51,7 +51,36 @@ export class ProjectDetailComponent {
     });
   }
 
+  canEdit(): boolean {
+    if (!this.project) {
+      return false;
+    }
+    return this.projectService.canEditProjectSync(this.project);
+  }
 
+  onEditTask(taskId: string) {
+
+  }
+
+  onDeleteTask(taskId: string) {
+    if (!this.project?.id) {
+      return;
+    }
+
+    if (!confirm('Are you sure you want to delete this task?')) {
+      return;
+    }
+
+    this.projectService.deleteTask(this.project.id, taskId).subscribe({
+      next: () => {
+        // Reload the project to refresh the task list
+        this.loadProject(this.project!.id);
+      },
+      error: () => {
+        this.errorMessage = 'Unable to delete task. Please try again later.';
+      }
+    });
+  }
 
 }
 

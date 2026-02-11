@@ -1,11 +1,11 @@
 <div class="container projects-container">
   <h1>Projects</h1>
-  
+
   <div *ngIf="projects$ | async as projects; else loading">
     <div *ngIf="projects.length === 0; else projectList">
       <p>No projects found.</p>
     </div>
-    
+
 
     <ng-template #projectList>
       <div class="table-responsive">
@@ -28,7 +28,7 @@
               </td>
               <td>
                 <a *ngIf="project.id;" [routerLink]="['/project', project.id]">
-                    {{ project.name }}
+                  {{ project.name }}
                 </a>
               </td>
               <td>{{ project.createdByDisplayName }}</td>
@@ -43,12 +43,10 @@
         </table>
       </div>
     </ng-template>
-    
+
   </div>
 
 
-
-  
   <ng-template #loading>
     <p>Loading projects...</p>
   </ng-template>

@@ -52,14 +52,23 @@ export class TaskAddComponent {
       next: (projectTask) => {
         this.projectTask = projectTask;
         this.isLoading = false;
-        this.successMessage = 'Seed updated.';
-        // this.goBack();
+        this.successMessage = 'Task updated.';
+        this.goBack();
       },
       error: () => {
-        this.errorMessage = 'Unable to update seed. Please try again later.';
+        this.errorMessage = 'Unable to update task. Please try again later.';
         this.isLoading = false;
       }
     });
+  }
+
+  goBack(): void {
+    const projectId = this.route.snapshot.paramMap.get('projectId');
+    if (projectId) {
+      this.router.navigate(['/project', projectId]);
+    } else {
+      this.router.navigate(['/projects']);
+    }
   }
 
   private buildPayload(): Partial<ProjectTask> {

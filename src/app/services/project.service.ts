@@ -102,4 +102,20 @@ export class ProjectService {
 
     return this.http.post<ProjectTask>(`/api/Project/${projectId}/tasks/`, body);
   }
+
+  editTask(projectId: string, title: string, description: string, status: number, assignedTo: string): Observable<ProjectTask> {
+    const body = {
+      title: title,
+      description: description,
+      status: status,
+      assignedTo: assignedTo
+    };
+
+    return this.http.post<ProjectTask>(`/api/Project/${projectId}/tasks/`, body);
+  }
+
+  deleteTask(projectId: string, taskId: string): Observable<void> {
+    return this.http.delete<void>(`/api/Project/${projectId}/tasks/${taskId}`);
+  }
+
 }
