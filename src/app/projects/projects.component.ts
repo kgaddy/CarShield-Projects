@@ -32,5 +32,23 @@ export class ProjectsComponent implements OnInit {
 
     return this.projectService.canEditProjectSync(project);
   }
+
+  onDeleteProject(projectId: string) {
+    if (!confirm('Are you sure you want to delete this project?')) {
+      return;
+    }
+    
+    this.projectService.deleteProject(projectId).subscribe({
+      next: () => {
+        // Refresh the projects list after successful deletion
+        this.projects$ = this.projectService.getProjects();
+      },
+      error: (error) => {
+        console.error('Error deleting project:', error);
+        const errorMessage = error.error?.message || error.message || 'Unknown error';
+        alert(`Failed to delete project: ${errorMessage}\n\nCheck console for details.`);
+      }
+    });
+  }
 }
 

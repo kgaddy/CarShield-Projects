@@ -39,13 +39,14 @@
               <td>{{ project.createdByDisplayName }}</td>
               <td>{{ project.percentComplete }}% complete</td>
               <td>
-                <button 
-                  *ngIf="canEdit(project)" 
-                  class="btn btn-sm btn-primary"
-                  [routerLink]="['/project-form', project.id]"
-                >
+                <button *ngIf="canEdit(project)" class="btn btn-sm btn-primary me-2"
+                  [routerLink]="['/project-form', project.id]">
                   Edit
                 </button>
+
+                <button *ngIf="canEdit(project)" class="btn btn-sm btn-danger"
+                  (click)="onDeleteProject(project.id)">Delete</button>
+
               </td>
             </tr>
           </tbody>

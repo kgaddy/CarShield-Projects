@@ -25,7 +25,6 @@
   <div class="table-responsive pt-5">
 
 
-
     <div class="d-flex align-items-center highlight-toolbar ps-3 pe-2 py-1 border-0 border-top border-bottom">
       <h4>Tasks</h4>
       <div class="d-flex ms-auto">
@@ -63,10 +62,8 @@
           <td>{{ TaskStatus.toDisplayString(projectTask.status) }}</td>
           <td>{{ projectTask.assignedToDisplayName }}</td>
           <td *ngIf="canEdit()">
-            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-              <button class="btn btn-sm btn-primary" (click)="onEditTask(projectTask.id)">Edit</button>
-              <button class="btn btn-sm btn-danger" (click)="onDeleteTask(projectTask.id)">Delete</button>
-            </div>
+            <button class="btn btn-sm btn-primary me-2" (click)="onEditTask(projectTask.id)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="onDeleteTask(projectTask.id)">Delete</button>
           </td>
 
         </tr>

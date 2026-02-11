@@ -141,4 +141,8 @@ export class ProjectService {
     return this.http.delete<void>(`/api/Project/${projectId}/tasks/${taskId}`);
   }
 
+  deleteProject(projectId: string): Observable<void> {
+    return this.http.delete<void>(`/api/Project/DeleteProject/${projectId}`);
+  }
+
 }
