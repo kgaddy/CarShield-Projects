@@ -42,7 +42,7 @@ export interface Project {
   createdOn: string;
   projectTasks: ProjectTask[];
   createdByDisplayName: string;
-  percentComplete: DoubleRange
+  percentComplete: Number
 }
 
 export enum ProjectStatus {

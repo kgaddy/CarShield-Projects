@@ -42,7 +42,7 @@ export class AuthService {
   login(email: string, password: string): Observable<User> {
     const url = `/api/Project/Login`;
     const body: LoginRequest = { email, password };
-  
+
     return this.http.post<LoginResponse>(url, body).pipe(
       map(apiResponse => this.mapApiUserToUser(apiResponse)),
       tap(user => {
@@ -74,6 +74,7 @@ export class AuthService {
 
   // Check if user is admin
   isAdmin(): boolean {
-    return this.currentUserSubject.value?.authType === AuthType.Admin;
+    var isAuth = this.currentUserSubject.value?.authType === AuthType.Admin;
+    return isAuth;
   }
 }

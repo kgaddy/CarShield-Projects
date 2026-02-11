@@ -42,6 +42,29 @@ export class ProjectService {
     return this.http.get<Project>(`/api/Project/GetProject/${id}`);
   }
 
+  // Create a new project
+  createProject(project: Project): Observable<Project> {
+    const body = {
+      name: project.name,
+      description: project.description,
+      status: project.status,
+      createdBy: project.createdBy
+    };
+
+    return this.http.post<Project>('/api/Project/CreateProject', body);
+  }
+
+  // Update an existing project
+  updateProject(project: Project): Observable<Project> {
+    const body = {
+      name: project.name,
+      description: project.description,
+      status: project.status
+    };
+
+    return this.http.put<Project>(`/api/Project/UpdateProject/${project.id}`, body);
+  }
+
   canEditProject(project: Project): Observable<boolean> {
     return this.authService.currentUser$.pipe(
       map(user => {

@@ -1,0 +1,82 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="mb-0">{{ isEditMode ? 'Edit Project' : 'Create New Project' }}</h3>
+        </div>
+        <div class="card-body">
+          <!-- Loading State -->
+          <div *ngIf="isLoading" class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Loading project...</p>
+          </div>
+
+          <!-- Error Message -->
+          <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
+
+          <!-- Form -->
+          <form *ngIf="!isLoading" #projectForm="ngForm" (ngSubmit)="onSubmit()">
+
+            <!-- Project Name -->
+            <div class="mb-3">
+              <label for="projectName" class="form-label">
+                Project Name <span class="text-danger">*</span>
+              </label>
+              <input type="text" class="form-control" id="projectName" name="name" [(ngModel)]="project.name" required
+                #name="ngModel" placeholder="Enter project name">
+              <div class="invalid-feedback" [class.d-block]="name.invalid && name.touched">
+                Project name is required.
+              </div>
+            </div>
+
+            <!-- Project Description -->
+            <div class="mb-3">
+              <label for="projectDescription" class="form-label">
+                Description <span class="text-danger">*</span>
+              </label>
+              <textarea class="form-control" id="projectDescription" name="description"
+                [(ngModel)]="project.description" required #description="ngModel" rows="4"
+                placeholder="Enter project description"></textarea>
+              <div class="invalid-feedback" [class.d-block]="description.invalid && description.touched">
+                Project description is required.
+              </div>
+            </div>
+
+            <!-- Project Status -->
+            <div class="mb-3">
+              <label for="projectStatus" class="form-label">
+                Status <span class="text-danger">*</span>
+              </label>
+              <select class="form-select" id="projectStatus" name="status" [(ngModel)]="project.status" required
+                #status="ngModel">
+                <option *ngIf="!isEditMode" [ngValue]="null" disabled>Select project status</option>
+                <option [ngValue]="0">Not Started</option>
+                <option [ngValue]="1">In Progress</option>
+                <option [ngValue]="2">Completed</option>
+              </select>
+              <div class="invalid-feedback" [class.d-block]="status.invalid && status.touched">
+                Project status is required.
+              </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="d-flex justify-content-end gap-2 mt-4">
+              <button type="button" class="btn btn-secondary" (click)="onCancel()" [disabled]="isSaving">
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid || isSaving">
+                <span *ngIf="isSaving" class="spinner-border spinner-border-sm me-2" role="status"></span>
+                {{ isSaving ? 'Saving...' : (isEditMode ? 'Update Project' : 'Create Project') }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

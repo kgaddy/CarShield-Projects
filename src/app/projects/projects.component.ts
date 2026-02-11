@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProjectService } from '../services/project.service';
 import { AuthService } from '../services/auth.service';
-import { Project, ProjectStatus, TaskStatus } from '../models/project';
+import { Project, ProjectStatus } from '../models/project';
 import { User } from '../models/auth';
 
 @Component({
@@ -15,7 +15,6 @@ import { User } from '../models/auth';
 })
 export class ProjectsComponent implements OnInit {
   ProjectStatus = ProjectStatus;
-  TaskStatus = TaskStatus
   projects$!: Observable<Project[]>;
   currentUser$!: Observable<User | null>;
 
@@ -30,6 +29,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   canEdit(project: Project): boolean {
+
     return this.projectService.canEditProjectSync(project);
   }
 }

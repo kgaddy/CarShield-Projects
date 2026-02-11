@@ -22,7 +22,7 @@ export class TaskDetailComponent {
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const projectId = this.route.snapshot.paramMap.get('projectId');
@@ -39,7 +39,7 @@ export class TaskDetailComponent {
   private loadProjectTask(projectId: string, taskId: string): void {
     this.isLoading = true;
     this.errorMessage = '';
-    
+
 
     this.projectService.getProjectTask(projectId, taskId).subscribe({
       next: (projectTask) => {
