@@ -37,7 +37,7 @@ export class ProjectsComponent implements OnInit {
     if (!confirm('Are you sure you want to delete this project?')) {
       return;
     }
-    
+
     this.projectService.deleteProject(projectId).subscribe({
       next: () => {
         // Refresh the projects list after successful deletion

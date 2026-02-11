@@ -18,7 +18,7 @@ export const routes: Routes = [{
     canActivate: [authGuard]
 },
 {
-    path: 'project/:Id',
+    path: 'projectDetail/:Id',
     pathMatch: 'full',
     loadComponent: () => {
         return import('./project-detail/project-detail.component').then((m) => m.ProjectDetailComponent)

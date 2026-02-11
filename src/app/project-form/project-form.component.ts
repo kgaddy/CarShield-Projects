@@ -63,9 +63,7 @@ export class ProjectFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.isSaving) {
-      return;
-    }
+
 
     this.isSaving = true;
     this.errorMessage = '';
@@ -74,7 +72,6 @@ export class ProjectFormComponent implements OnInit {
       this.projectService.updateProject(this.project).subscribe({
         next: () => {
           this.isSaving = false;
-          this.router.navigate(['/projects', this.project.id]);
         },
         error: () => {
           this.errorMessage = 'Unable to update project. Please try again later.';
@@ -91,15 +88,14 @@ export class ProjectFormComponent implements OnInit {
       this.projectService.createProject(this.project).subscribe({
         next: (createdProject) => {
           this.isSaving = false;
-          //this.router.navigate(['/projects', createdProject.id]);
         },
         error: () => {
           this.errorMessage = 'Unable to create project. Please try again later.';
           this.isSaving = false;
         }
       });
-      this.goBack()
     }
+    this.goBack()
   }
 
   onCancel(): void {
@@ -108,7 +104,7 @@ export class ProjectFormComponent implements OnInit {
 
   goBack(): void {
     if (this.isEditMode && this.project.id) {
-      this.router.navigate(['/projects', this.project.id]);
+      this.router.navigate(['/projectDetail', this.project.id]);
     } else {
       this.router.navigate(['/projects']);
     }
