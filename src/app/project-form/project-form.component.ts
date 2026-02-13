@@ -72,6 +72,7 @@ export class ProjectFormComponent implements OnInit {
       this.projectService.updateProject(this.project).subscribe({
         next: () => {
           this.isSaving = false;
+          this.goBack();
         },
         error: () => {
           this.errorMessage = 'Unable to update project. Please try again later.';
@@ -88,6 +89,7 @@ export class ProjectFormComponent implements OnInit {
       this.projectService.createProject(this.project).subscribe({
         next: (createdProject) => {
           this.isSaving = false;
+          this.goBack();
         },
         error: () => {
           this.errorMessage = 'Unable to create project. Please try again later.';
@@ -95,7 +97,6 @@ export class ProjectFormComponent implements OnInit {
         }
       });
     }
-    this.goBack()
   }
 
   onCancel(): void {

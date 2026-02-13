@@ -27,14 +27,17 @@ export class ProjectDetailComponent {
   ) { }
 
   ngOnInit(): void {
-    const Id = this.route.snapshot.paramMap.get('Id');
+    // Subscribe to route params to reload data when navigating back to the same route
+    this.route.paramMap.subscribe(params => {
+      const Id = params.get('Id');
 
-    if (!Id) {
-      this.errorMessage = 'Missing id.';
-      return;
-    }
+      if (!Id) {
+        this.errorMessage = 'Missing id.';
+        return;
+      }
 
-    this.loadProject(Id);
+      this.loadProject(Id);
+    });
   }
 
   private loadProject(Id: string): void {
