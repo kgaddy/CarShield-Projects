@@ -1,9 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
-import { ProjectService } from '../../services/project.service';
-import { AuthService } from '../../services/auth.service';
 import { Project, ProjectStatus } from '../../models/project';
 import { User } from '../../models/auth';
 
@@ -18,7 +15,6 @@ import { User } from '../../models/auth';
 export class ProjectsListComponent {
   @Input() projects: Project[] = [];
   @Input() currentUser: User | null = null;
-  //@Input() showActions: boolean = true;
   ProjectStatus = ProjectStatus;
 
   @Output() deleteProject = new EventEmitter<string>();

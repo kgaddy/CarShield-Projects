@@ -111,6 +111,11 @@ export class ProjectService {
 
 
   // Tasks
+  //http://localhost:5271/api/Projects/UserTasks/nb699d54-u6a3-427d-bd94-c5e69a236wgv
+  getUserProjectTask(userId: string): Observable<ProjectTask[]> {
+    return this.http.get<ProjectTask[]>(`/api/Projects/UserTasks/${userId}`);
+  }
+
   getProjectTask(projectId: string, taskId: string): Observable<ProjectTask> {
     return this.http.get<ProjectTask>(`/api/Project/${projectId}/tasks/${taskId}`);
   }

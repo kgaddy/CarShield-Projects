@@ -5,6 +5,7 @@ export interface ProjectTask {
   status: TaskStatus;
   assignedTo: string;
   assignedToDisplayName: String;
+  projectId: string;
 }
 
 export enum TaskStatus {

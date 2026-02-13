@@ -4,19 +4,23 @@ import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProjectService } from '../services/project.service';
 import { AuthService } from '../services/auth.service';
-import { Project, ProjectStatus } from '../models/project';
+import { Project, ProjectTask } from '../models/project';
 import { User } from '../models/auth';
 import { ProjectsListComponent } from '../componets/projects-list/projects-list.component';
+import { TaskDetailComponent } from '../task-detail/task-detail.component';
+import { TaskListComponent } from '../componets/task-list/task-list.component';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, ProjectsListComponent],
+  imports: [CommonModule, ProjectsListComponent, TaskListComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
   projects$!: Observable<Project[]>;
+  projectTasks$!: Observable<ProjectTask[]>;
   currentUser$!: Observable<User | null>;
+  currentUserValue: User | null = null;  // Initialize it
 
   constructor(
     private projectService: ProjectService,
@@ -24,9 +28,13 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    //projects$ = this.projectService.getProjects();
     this.projects$ = this.projectService.getProjects();
     this.currentUser$ = this.authService.currentUser$;
+
+    this.currentUserValue = this.authService.currentUserValue;
+    if (this.currentUserValue?.id) {
+      this.projectTasks$ = this.projectService.getUserProjectTask(this.currentUserValue.id);
+    }
   }
 
 }
