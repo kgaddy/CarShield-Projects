@@ -1,6 +1,15 @@
-<div class="container">
-    <div class="jumbotron">home works!</div>
-
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">My Projects</h3>
+                </div>
+                <div class="card-body">
+                    <app-projects-list [projects]="(projects$ | async) || []" [currentUser]="(currentUser$ | async)">
+                    </app-projects-list>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-
