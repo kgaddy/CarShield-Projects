@@ -46,7 +46,7 @@ export class TaskFormComponent implements OnInit {
 
   private loadTask(): void {
     const projectId = this.route.snapshot.paramMap.get('projectId');
-    
+
     if (!projectId || !this.taskId) {
       this.errorMessage = 'Missing project or task id.';
       return;
@@ -121,7 +121,7 @@ export class TaskFormComponent implements OnInit {
   goBack(): void {
     const projectId = this.route.snapshot.paramMap.get('projectId');
     if (projectId) {
-      this.router.navigate(['/project', projectId]);
+      this.router.navigate(['/projectDetail', projectId]);
     } else {
       this.router.navigate(['/projects']);
     }
@@ -137,7 +137,6 @@ export class TaskFormComponent implements OnInit {
     };
     return payload;
   }
-
 
   private toOptionalString(value: string | null | undefined): string | undefined {
     if (value === null || value === undefined) {
