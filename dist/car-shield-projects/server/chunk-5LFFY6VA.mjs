@@ -1,2 +1,0 @@
-import './polyfills.server.mjs';
-import{Da as n,Ea as s,Ha as r,ua as o}from"./chunk-DSAV3YQX.mjs";import"./chunk-X2SEQXRR.mjs";var p=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=o({type:t,selectors:[["app-projects"]],decls:2,vars:0,consts:[[1,"jumbotron"]],template:function(e,i){e&1&&(n(0,"div",0),r(1,"projects works!"),s())},encapsulation:2})};export{p as ProjectsComponent};

@@ -6,24 +6,91 @@ export default {
   locale: undefined,
   routes: [
   {
-    "renderMode": 1,
+    "renderMode": 0,
     "preload": [
-      "chunk-JLUI5I6Y.js"
+      "chunk-B52CYZ25.js",
+      "chunk-4GASFIS4.js",
+      "chunk-RBNHI7TP.js"
     ],
-    "route": "/home"
+    "route": "/"
   },
   {
-    "renderMode": 1,
+    "renderMode": 0,
     "preload": [
-      "chunk-TSHHCODJ.js"
+      "chunk-FP35BIW7.js",
+      "chunk-4GASFIS4.js",
+      "chunk-RBNHI7TP.js"
     ],
     "route": "/projects"
+  },
+  {
+    "renderMode": 0,
+    "preload": [
+      "chunk-DT3TXEGZ.js",
+      "chunk-4GASFIS4.js",
+      "chunk-RBNHI7TP.js"
+    ],
+    "route": "/projectDetail/*"
+  },
+  {
+    "renderMode": 0,
+    "preload": [
+      "chunk-ZYQ7TBJB.js",
+      "chunk-RBNHI7TP.js"
+    ],
+    "route": "/task/*/*"
+  },
+  {
+    "renderMode": 0,
+    "preload": [
+      "chunk-Y3IXGWSO.js",
+      "chunk-RBNHI7TP.js",
+      "chunk-FLNHMJ6J.js"
+    ],
+    "route": "/addTask/*"
+  },
+  {
+    "renderMode": 0,
+    "preload": [
+      "chunk-ITB5WGOC.js",
+      "chunk-4GASFIS4.js",
+      "chunk-RBNHI7TP.js",
+      "chunk-FLNHMJ6J.js"
+    ],
+    "route": "/addProject"
+  },
+  {
+    "renderMode": 0,
+    "preload": [
+      "chunk-ITB5WGOC.js",
+      "chunk-4GASFIS4.js",
+      "chunk-RBNHI7TP.js",
+      "chunk-FLNHMJ6J.js"
+    ],
+    "route": "/project-form/*"
+  },
+  {
+    "renderMode": 0,
+    "preload": [
+      "chunk-Y3IXGWSO.js",
+      "chunk-RBNHI7TP.js",
+      "chunk-FLNHMJ6J.js"
+    ],
+    "route": "/editTask/*/*"
+  },
+  {
+    "renderMode": 0,
+    "preload": [
+      "chunk-27ZJR2AR.js",
+      "chunk-FLNHMJ6J.js"
+    ],
+    "route": "/login"
   }
 ],
   entryPointToBrowserMapping: undefined,
   assets: {
-    'index.csr.html': {size: 1174, hash: '520cb9b81920e9c3483ec231799a62f44ef251d8bd2265723a41e24a873d5ff5', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
-    'index.server.html': {size: 1491, hash: '21c006ae695560e3b7cd272e21007c32c3e70c6f22252d3007ad3049959dd37e', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
+    'index.csr.html': {size: 1175, hash: 'c8440ab474c27ad0694c1ce595155b88f62bddb4ca522a8d31911b70015087b9', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
+    'index.server.html': {size: 1492, hash: '19fe96fbb3b89d572abecb997d05e2eaf390cfbc4ef2a907e4c6e7bfffd42d00', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
     'styles-6RWSCF4G.css': {size: 180, hash: 'q8PJGL+W8Gs', text: () => import('./assets-chunks/styles-6RWSCF4G_css.mjs').then(m => m.default)}
   },
 };
