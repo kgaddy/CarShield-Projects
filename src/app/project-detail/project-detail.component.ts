@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Project, ProjectStatus, TaskStatus } from '../models/project';
+import { Project, ProjectStatus, ProjectTask, TaskStatus } from '../models/project';
 import { ProjectService } from '../services/project.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -56,11 +56,18 @@ export class ProjectDetailComponent {
     });
   }
 
-  canEdit(): boolean {
+  canEditProject(): boolean {
     if (!this.project) {
       return false;
     }
     return this.projectService.canEditProjectSync(this.project);
+  }
+
+  canEditProjectTask(projectTask: ProjectTask): boolean {
+    if (!this.project) {
+      return false;
+    }
+    return this.projectService.canEditTask(projectTask, this.project);
   }
 
   onEditTask(taskId: string) {

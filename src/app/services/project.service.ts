@@ -96,6 +96,26 @@ export class ProjectService {
     return project.createdBy === user.id;
   }
 
+  // checks if a user can edit their task
+  canEditTask(projectTask: ProjectTask, project: Project): boolean {
+    const user = this.authService.currentUserValue;
+
+    if (!user) return false;
+
+    // Admin can edit all projects
+    if (this.authService.isAdmin()) {
+      return true;
+    }
+
+    //project owner can edit
+    if (this.canEditProjectSync(project)) {
+      return true
+    }
+
+    // Regular users can only edit their own projects
+    return projectTask.assignedTo === user.id;
+  }
+
 
   getMyProjects(): Observable<Project[]> {
     return combineLatest([

@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   projects$!: Observable<Project[]>;
   projectTasks$!: Observable<ProjectTask[]>;
   currentUser$!: Observable<User | null>;
-  currentUserValue: User | null = null;  // Initialize it
+  currentUserValue: User | null = null;
 
   constructor(
     private projectService: ProjectService,
