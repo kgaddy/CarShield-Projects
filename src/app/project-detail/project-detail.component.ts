@@ -63,8 +63,8 @@ export class ProjectDetailComponent {
     return this.projectService.canEditProjectSync(this.project);
   }
 
-  canEditProjectTask(projectTask: ProjectTask): boolean {
-    if (!this.project) {
+  canEditProjectTask(projectTask: ProjectTask | null): boolean {
+    if (!this.project || !projectTask) {
       return false;
     }
     return this.projectService.canEditTask(projectTask, this.project);

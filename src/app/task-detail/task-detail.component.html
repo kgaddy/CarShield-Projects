@@ -1,10 +1,39 @@
-
 <div class="container">
     <p *ngIf="isLoading">Loading task...</p>
     <p *ngIf="errorMessage">{{ errorMessage }}</p>
-    <h1>{{projectTask?.title}}</h1>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>{{ projectTask?.title }}</h1>
+        <div class="d-flex gap-2">
+            <a *ngIf="projectId" class="btn btn-outline-secondary" [routerLink]="['/projectDetail', projectId]">
+                Back to project
+            </a>
+            <button *ngIf="canEditProjectTask(projectTask) && projectTask?.id && projectId" class="btn btn-primary"
+                [routerLink]="['/editTask', projectId, projectTask?.id]">
+                Edit Task
+            </button>
+        </div>
+    </div>
+
     <ul class="list-group">
-        <li class="list-group-item">{{projectTask?.assignedToDisplayName}}</li>
-        <li class="list-group-item">{{projectTask?.description}}</li>
+        <li class="list-group-item">
+            <strong>Status</strong>
+            <span class="badge rounded-pill ms-2" [ngClass]="{
+                'bg-secondary': projectTask?.status === TaskStatus.StatusNew,
+                'bg-info': projectTask?.status === TaskStatus.Ready,
+                'bg-primary': projectTask?.status === TaskStatus.InProgress,
+                'bg-success': projectTask?.status === TaskStatus.Done
+            }">
+                {{ TaskStatus.toDisplayString(projectTask?.status ?? TaskStatus.StatusNew) }}
+            </span>
+        </li>
+        <li class="list-group-item">
+            <strong>Assigned to</strong><br>
+            {{ projectTask?.assignedToDisplayName }}
+        </li>
+        <li class="list-group-item">
+            <strong>Description</strong><br>
+            {{ projectTask?.description || '—' }}
+        </li>
     </ul>
 </div>

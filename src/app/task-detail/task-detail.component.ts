@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Project, ProjectTask } from '../models/project';
+import { Project, ProjectTask, TaskStatus } from '../models/project';
 import { ProjectService } from '../services/project.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
@@ -14,10 +14,12 @@ import { RouterLink } from '@angular/router';
 
 export class TaskDetailComponent {
   projectTask: ProjectTask | null = null;
+  project: Project | null = null;
   projectId: string | null = null;
   projectTaskId: string | null = null;
   isLoading = false;
   errorMessage = '';
+  TaskStatus = TaskStatus;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,10 +33,35 @@ export class TaskDetailComponent {
       this.errorMessage = 'Missing id.';
       return;
     }
-
+    this.projectId = projectId;
+    this.projectTaskId = taskId;
+    this.loadProject(projectId);
     this.loadProjectTask(projectId, taskId);
   }
 
+
+  canEditProjectTask(projectTask: ProjectTask | null): boolean {
+    if (!projectTask || !this.project) {
+      return false;
+    }
+    return this.projectService.canEditTask(projectTask, this.project);
+  }
+
+  private loadProject(projectId: string): void {
+    this.isLoading = true;
+    this.errorMessage = '';
+
+    this.projectService.getProject(projectId).subscribe({
+      next: (project) => {
+        this.project = project;
+        this.isLoading = false;
+      },
+      error: () => {
+        this.errorMessage = 'Unable to load project details. Please try again later.';
+        this.isLoading = false;
+      }
+    });
+  }
 
   private loadProjectTask(projectId: string, taskId: string): void {
     this.isLoading = true;
